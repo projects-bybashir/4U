@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أحمد.. العمر فلسفة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #0B0E14;
+            font-family: 'Cairo', sans-serif;
+            color: #EDF2F7;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            background-image: radial-gradient(ellipse at 30% 20%, rgba(212, 175, 55, 0.06) 0%, transparent 60%);
+        }
+        .card {
+            max-width: 720px;
+            width: 100%;
+            background: rgba(20, 30, 44, 0.92);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            border-radius: 32px;
+            padding: 2.5rem 2rem;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7);
+            position: relative;
+            overflow: hidden;
+        }
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.03) 0%, transparent 60%);
+            pointer-events: none;
+        }
+        .gold {
+            color: #D4AF37;
+        }
+        .badge {
+            display: inline-block;
+            background: rgba(212, 175, 55, 0.12);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 40px;
+            padding: 0.1rem 1.2rem;
+            font-size: 0.65rem;
+            color: #D4AF37;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 0.8rem;
+        }
+        h1 {
+            font-weight: 900;
+            font-size: 2.4rem;
+            line-height: 1.2;
+            margin-bottom: 0.3rem;
+        }
+        h1 .highlight {
+            background: linear-gradient(90deg, #D4AF37, #F9E076);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .subtitle {
+            color: #A0B4C8;
+            font-weight: 300;
+            font-size: 1rem;
+            margin-bottom: 1.8rem;
+            border-right: 3px solid #D4AF37;
+            padding-right: 1rem;
+        }
+        .philosophy-box {
+            background: rgba(0, 0, 0, 0.25);
+            border-radius: 16px;
+            padding: 1.2rem 1.4rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+        .philosophy-box:hover {
+            border-color: #D4AF3740;
+            background: rgba(212, 175, 55, 0.03);
+        }
+        .philosophy-box .icon {
+            color: #D4AF37;
+            font-size: 1.2rem;
+            margin-left: 0.6rem;
+        }
+        .philosophy-box p {
+            font-size: 1.05rem;
+            line-height: 1.9;
+            color: #E5E9F0;
+            font-weight: 300;
+        }
+        .philosophy-box .author {
+            font-size: 0.7rem;
+            color: #6A7F96;
+            margin-top: 0.3rem;
+            letter-spacing: 0.05em;
+        }
+
+        /* الأزرار التفاعلية */
+        .action-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.6rem;
+            margin: 1.5rem 0;
+        }
+        .action-btn {
+            background: rgba(212, 175, 55, 0.06);
+            border: 1px solid rgba(212, 175, 55, 0.12);
+            border-radius: 12px;
+            padding: 0.7rem 0.2rem;
+            text-align: center;
+            color: #A0B4C8;
+            font-size: 0.7rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            font-family: 'Cairo', sans-serif;
+        }
+        .action-btn:hover {
+            background: rgba(212, 175, 55, 0.15);
+            border-color: #D4AF37;
+            color: #D4AF37;
+            transform: translateY(-2px);
+        }
+        .action-btn i {
+            display: block;
+            font-size: 1.4rem;
+            color: #D4AF37;
+            margin-bottom: 0.2rem;
+        }
+
+        /* الدعاء */
+        .dua-section {
+            background: rgba(212, 175, 55, 0.04);
+            border-radius: 16px;
+            padding: 1.2rem 1.4rem;
+            border-right: 4px solid #D4AF37;
+            margin-top: 1.2rem;
+            display: none;
+            animation: fadeSlide 0.6s ease forwards;
+        }
+        .dua-section.open {
+            display: block;
+        }
+        @keyframes fadeSlide {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .dua-section h3 {
+            color: #D4AF37;
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 0.4rem;
+        }
+        .dua-section .dua-text {
+            font-size: 1.1rem;
+            line-height: 2;
+            color: #EDF2F7;
+            font-weight: 400;
+        }
+        .dua-section .dua-text .amin {
+            color: #D4AF37;
+            font-weight: 700;
+        }
+
+        .footer-note {
+            margin-top: 1.5rem;
+            font-size: 0.7rem;
+            color: #4A5F76;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            padding-top: 1rem;
+            letter-spacing: 0.05em;
+        }
+        .footer-note span {
+            color: #D4AF37;
+        }
+
+        /* تحسين للجوال */
+        @media (max-width: 600px) {
+            .card { padding: 1.5rem 1rem; }
+            h1 { font-size: 1.8rem; }
+            .action-grid { grid-template-columns: 1fr 1fr; }
+            .philosophy-box p { font-size: 0.95rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <!-- الشارة -->
+        <div class="badge">🎂 عيد ميلاد سعيد</div>
+
+        <!-- العنوان -->
+        <h1>
+            إلى <span class="highlight">أحمد</span>
+        </h1>
+        <div class="subtitle">
+            في ماليزيا البعيدة... العمر ليس رقماً، بل أثرٌ في القلوب
+        </div>
+
+        <!-- القسم الفلسفي التفاعلي (يظهر بالضغط) -->
+        <div class="philosophy-box" onclick="togglePhilosophy(this)">
+            <div>
+                <span class="icon">✦</span> 
+                <strong style="color:#D4AF37;">فلسفة اليوم</strong>
+                <span style="color:#6A7F96; font-size:0.8rem; margin-right:0.5rem;">(اضغط لتقرأ)</span>
+            </div>
+            <div class="phil-content" style="display: none; margin-top: 0.8rem;">
+                <p>
+                    "الحياة ليست عدد السنوات التي نعيشها، بل عدد اللحظات التي نُحدث فيها أثراً في قلوب الآخرين. 
+                    أنت يا أحمد، رغم المسافات، أثَرُك في قلوبنا لا يُمحى. لأن الحب لا يعرف الحدود، 
+                    والدعاء يقطع البحار."
+                </p>
+                <div class="author">— من غزة إلى كوالالمبور</div>
+            </div>
+        </div>
+
+        <!-- أزرار تفاعلية لإظهار رسائل فلسفية -->
+        <div class="action-grid">
+            <div class="action-btn" onclick="showMessage('time')">
+                <i>⌛</i> عن الوقت
+            </div>
+            <div class="action-btn" onclick="showMessage('distance')">
+                <i>🌏</i> عن المسافة
+            </div>
+            <div class="action-btn" onclick="showMessage('age')">
+                <i>🌟</i> عن العمر
+            </div>
+        </div>
+
+        <!-- مكان عرض الرسائل -->
+        <div id="wisdom-display" style="background: rgba(0,0,0,0.15); border-radius: 12px; padding: 0.8rem 1.2rem; min-height: 60px; border: 1px dashed rgba(212,175,55,0.1); margin-bottom: 0.5rem; transition: 0.3s;">
+            <p style="color: #6A7F96; font-size: 0.85rem; text-align: center; margin:0;">
+                <i>اختر أحد الأزرار لترى حكمة...</i>
+            </p>
+        </div>
+
+        <!-- زر الدعاء -->
+        <div style="margin: 1.2rem 0 0.5rem 0;">
+            <button onclick="toggleDua()" style="background: #D4AF37; color: #0B0E14; border: none; padding: 0.6rem 1.8rem; border-radius: 40px; font-weight: 700; font-size: 0.9rem; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 20px rgba(212,175,55,0.2); width: 100%; font-family: 'Cairo', sans-serif;">
+                🤲 ادعُ لأحمد
+            </button>
+        </div>
+
+        <!-- الدعاء (مخفي في البداية) -->
+        <div class="dua-section" id="duaBox">
+            <h3>🤲 اللهم بارك له في عمره</h3>
+            <div class="dua-text">
+                اللهم بارك لخالي أحمد في عمره، وبارك له في أهله وماله، 
+                واجعله من الصالحين الذين يُشار إليهم بالبنان. <br><br>
+                اللهم إن كان بعيداً عنا في الدنيا، فاجعله قريباً منا في الدعاء، 
+                واجمعنا به على خير في أقرب وقت. <br><br>
+                اللهم أطل عمره على طاعة، وأحسن خاتمته، واغفر له ولوالديه، 
+                واجعله ممن يُقال لهم: (ادخلوها بسلامٍ آمنين). <br><br>
+                <span class="amin">اللهم آمين.</span>
+            </div>
+        </div>
+
+        <div class="footer-note">
+            <span>✦</span> من قلب غزة إلى روح ماليزيا <span>✦</span>
+        </div>
+    </div>
+
+    <script>
+        // دالة إظهار الرسائل الفلسفية عند الضغط على الأزرار
+        function showMessage(type) {
+            const display = document.getElementById('wisdom-display');
+            let msg = '';
+
+            if (type === 'time') {
+                msg = `"الوقت لا يمر، بل يتجدد في كل لحظة نختار فيها أن نكون بخير. 
+                يا أحمد، كل يوم تمر فيه هو فرصة جديدة لتكون أفضل نسخة من نفسك."`;
+            } else if (type === 'distance') {
+                msg = `"المسافات ليست عائقاً عندما تكون الأرواح متصلة. 
+                أنت في ماليزيا، ونحن في فلسطين، لكن دعاءنا يطير إليك دون طائرات."`;
+            } else if (type === 'age') {
+                msg = `"العمر الحقيقي ليس في عدد الشموع، بل في عدد القلوب التي أضأت بها. 
+                أنت يا أحمد، تضيء قلوبنا من بعيد، فكم أنت غالٍ."`;
+            }
+
+            display.innerHTML = `<p style="color: #EDF2F7; font-size: 0.95rem; line-height: 1.8; margin:0; text-align: center;">${msg}</p>`;
+        }
+
+        // دالة إظهار/إخفاء الدعاء
+        function toggleDua() {
+            const box = document.getElementById('duaBox');
+            box.classList.toggle('open');
+        }
+
+        // دالة إظهار النص الفلسفي عند الضغط على الصندوق
+        function togglePhilosophy(el) {
+            const content = el.querySelector('.phil-content');
+            if (content.style.display === 'none' || content.style.display === '') {
+                content.style.display = 'block';
+            } else {
+                content.style.display = 'none';
+            }
+        }
+
+        // تأثير أولي (ترحيب)
+        window.onload = function() {
+            setTimeout(() => {
+                document.getElementById('wisdom-display').innerHTML = `
+                    <p style="color: #D4AF37; font-size: 0.9rem; text-align: center; margin:0;">
+                        ✦ كل عام وأنت الخير يا خالي أحمد ✦
+                    </p>
+                `;
+            }, 500);
+        }
+    </script>
+
+</body>
+</html>
